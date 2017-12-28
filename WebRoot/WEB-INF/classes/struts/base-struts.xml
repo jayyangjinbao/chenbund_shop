@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <package name="wzd-default" namespace="/" extends="struts-default" abstract="true">
+    	<result-types>  
+            <result-type name="dispatcher" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="true"/>
+        </result-types> 
+        <interceptors>
+        	<!--<interceptor name="paramFilter" class="org.unbank.platform.web.interceptor.ParamFilterInterceptor"></interceptor> -->
+            <!-- 拦截器栈 -->
+             <interceptor-stack name="myStack">
+        		<interceptor-ref name="checkbox">
+         	 		<param name="uncheckedValue">0</param>
+       			</interceptor-ref>
+       			<interceptor-ref name="defaultStack"/>
+      		</interceptor-stack>
+        </interceptors>
+        
+        <default-interceptor-ref name="myStack" />
+		<!-- 这句话意思就是你说的了，只要找不到action，都会找这个默认的action-->
+		<default-action-ref name="defaultAction" />
+		
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+         
+    </package>
+</struts>
+
